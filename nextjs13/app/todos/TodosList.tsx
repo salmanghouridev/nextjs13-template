@@ -1,10 +1,13 @@
 import React from "react";
 import {Todos} from '@/typings'
+import Link from "next/link";
 
 const fetchtodos = async () => {
           const res = await fetch('https://jsonplaceholder.typicode.com/todos/')
           const todos: Todos[] = await res.json()
+          console.log(todos)
           return todos
+
           }
 async function TodosList() {
 const todos = await fetchtodos();
@@ -12,7 +15,8 @@ const todos = await fetchtodos();
    <>
     {todos.map((todo) => (
       <div key={todo.id}>
-        <p>{todo.title}</p>
+       <Link href={`/todos/${todo.id}`}>
+        {todo.title}</Link>
       </div>
     ))}
     
